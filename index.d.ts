@@ -141,6 +141,13 @@ The snapshotter generates the snapshot asynchronous.
 
 export default MapboxGL;
 
+type ExpressionArgument = string | number | boolean | Expression;
+type ExpressionName = string;
+interface Expression {
+  [index: number]: ExpressionArgument;
+  0: ExpressionName;
+}
+
 interface BackgroundLayerProps {
   /**
     A string that uniquely identifies the source in the style to which it is added.
@@ -182,7 +189,7 @@ interface BackgroundLayerProps {
     Filter only the features in the source layer that satisfy a condition that you define
   **/
 
-  filter?: any; // array;
+  filter?: Expression;
 
   /**
     The minimum zoom level at which the layer gets parsed and appears.
@@ -263,7 +270,7 @@ interface CameraProps {
     Center coordinate on map [lng, lat]
   **/
 
-    centerCoordinate?: any[]; // arrayOf;
+    centerCoordinate?: [number, number];
 
     /**
     Heading on map
@@ -286,13 +293,13 @@ interface CameraProps {
     northEastCoordinates - North east coordinate of bound
   **/
 
-      ne: any[]; // arrayOf;
+      ne: [number, number];
 
       /**
     southWestCoordinates - North east coordinate of bound
   **/
 
-      sw: any[]; // arrayOf;
+      sw: [number, number];
 
       /**
     Left camera padding for bounds
@@ -330,7 +337,7 @@ interface CameraProps {
     Center coordinate on map [lng, lat]
   **/
 
-  centerCoordinate?: any[]; // arrayOf;
+  centerCoordinate?: [number, number];
 
   /**
     Heading on map
@@ -353,13 +360,13 @@ interface CameraProps {
     northEastCoordinates - North east coordinate of bound
   **/
 
-    ne: any[]; // arrayOf;
+    ne: [number, number];
 
     /**
     southWestCoordinates - North east coordinate of bound
   **/
 
-    sw: any[]; // arrayOf;
+    sw: [number, number];
 
     /**
     Left camera padding for bounds
@@ -496,7 +503,7 @@ from which the receiver obtains the data to style.
     Filter only the features in the source layer that satisfy a condition that you define
   **/
 
-  filter?: any; // array;
+  filter?: Expression;
 
   /**
     The minimum zoom level at which the layer gets parsed and appears.
@@ -558,7 +565,7 @@ interface FillExtrusionLayerProps {
     Filter only the features in the source layer that satisfy a condition that you define
   **/
 
-  filter?: any; // array;
+  filter?: Expression;
 
   /**
     The minimum zoom level at which the layer gets parsed and appears.
@@ -620,7 +627,7 @@ interface FillLayerProps {
     Filter only the features in the source layer that satisfy a condition that you define
   **/
 
-  filter?: any; // array;
+  filter?: Expression;
 
   /**
     The minimum zoom level at which the layer gets parsed and appears.
@@ -684,7 +691,7 @@ from which the receiver obtains the data to style.
     Filter only the features in the source layer that satisfy a condition that you define
   **/
 
-  filter?: any; // array;
+  filter?: Expression;
 
   /**
     The minimum zoom level at which the layer gets parsed and appears.
@@ -723,7 +730,7 @@ Gifs are currently not supported.
     The top left, top right, bottom right, and bottom left coordinates for the image.
   **/
 
-  coordinates: any[]; // arrayOf;
+  coordinates: [number, number];
 }
 
 interface LightProps {
@@ -776,7 +783,7 @@ If the source has not yet been added to the current style, the behavior is undef
     Filter only the features in the source layer that satisfy a condition that you define
   **/
 
-  filter?: any; // array;
+  filter?: Expression;
 
   /**
     The minimum zoom level at which the layer gets parsed and appears.
@@ -1108,7 +1115,7 @@ interface RasterLayerProps {
     Filter only the features in the source layer that satisfy a condition that you define
   **/
 
-  filter?: any; // array;
+  filter?: Expression;
 
   /**
     The minimum zoom level at which the layer gets parsed and appears.
@@ -1320,7 +1327,7 @@ interface SymbolLayerProps {
     Filter only the features in the source layer that satisfy a condition that you define
   **/
 
-  filter?: any; // array;
+  filter?: Expression;
 
   /**
     The minimum zoom level at which the layer gets parsed and appears.
@@ -1447,7 +1454,7 @@ interface AnnotationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  coordinates?: any[]; // arrayOf;
+  coordinates?: [number, number];
 
   /**
     FIX ME NO DESCRIPTION

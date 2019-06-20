@@ -4,6 +4,8 @@ const prettier = require('prettier');
 
 const config = require('../docs/docs.json');
 
+const coordinatesTypes = ['ne', 'sw', 'centerCoordinate', 'coordinates'];
+
 /**
  * Print Preude
  *
@@ -58,18 +60,27 @@ function getComponentHead({name, props, description}) {
 /**
  * Get the DTS type for an docs.json type
  *
+ * @param name
  * @param type
+ *
  * @returns {string}
  */
-function getInterfaceType(type) {
+function getInterfaceType({name, type}) {
   if (typeof type === 'object' && type.name === 'shape') {
     return `{
     ${type.value.map(prop => getProperty(prop)).join('')}
   }`;
   }
 
+  if (name === 'filter') {
+    return 'Expression';
+  }
+
+  if (type === 'arrayOf' && coordinatesTypes.includes(name)) {
+    return '[number, number]';
+  }
   if (type === 'arrayOf') {
-    return `any[]; // ${type}`;
+    return `any[] // ${type}`;
   }
 
   if (type === 'number') {
@@ -103,7 +114,23 @@ function getProperty({name, description, required, type}) {
   /**
     ${description}
   **/ 
-  ${name}${required ? '' : '?'}: ${getInterfaceType(type)};
+  ${name}${required ? '' : '?'}: ${getInterfaceType({name, type})};
+    `;
+}
+
+/**
+ * Print special filter type (is annotaed as any, but we try to specify it a litte bit better)
+ *
+ * TODO: ongoing work
+ */
+function getExpressionType() {
+  return `
+        type ExpressionArgument = string | number | boolean | Expression;
+        type ExpressionName = string;
+        interface Expression {
+            [index: number]: ExpressionArgument;
+            0: ExpressionName;
+        }
     `;
 }
 
@@ -145,6 +172,7 @@ function getOutput() {
       .map(c => getComponentHead(c))
       .join('') +
     getPostlude() +
+    getExpressionType() +
     Object.values(config)
       .map(c => getComponentBody(c))
       .join('')
