@@ -3,6 +3,10 @@ declare module "mapbox__react-native-mapbox-gl";
 import { Component } from "react";
 
 declare namespace MapboxGL {
+  function setAccessToken(accessToken: string): void;
+  function getAccessToken(): Promise<void>;
+  function setTelemetryEnabled(telemetryEnabled: boolean): void;
+
   /**
     
   **/
@@ -19,7 +23,45 @@ declare namespace MapboxGL {
     
   **/
 
-  class Camera extends Component<CameraProps> {}
+  class Camera extends Component<CameraProps> {
+    /**
+    Map camera transitions to fit provided bounds
+    **/
+
+    fitBounds(
+      northEastCoordinates: any /* undefined */[],
+      southWestCoordinates: any /* undefined */[],
+      padding?: number,
+      animationDuration?: number
+    ): void;
+
+    /**
+    Map camera will fly to new coordinate
+    **/
+
+    flyTo(coordinates: any /* undefined */[], animationDuration?: number): void;
+
+    /**
+    Map camera will move to new coordinate at the same zoom level
+    **/
+
+    moveTo(
+      coordinates: any /* undefined */[],
+      animationDuration?: number
+    ): void;
+
+    /**
+    Map camera will zoom to specified level
+    **/
+
+    zoomTo(zoomLevel: number, animationDuration?: number): void;
+
+    /**
+    Map camera will perform updates based on provided config. Advanced use only!
+    **/
+
+    setCamera(config: any /* {"name":"Object"} */): void;
+  }
 
   /**
     CircleLayer is a style layer that renders one or more filled circles on the map.
@@ -68,7 +110,83 @@ The georeferenced image scales and rotates as the user zooms and rotates the map
     MapView backed by Mapbox Native GL
   **/
 
-  class MapView extends Component<MapViewProps> {}
+  class MapView extends Component<MapViewProps> {
+    /**
+    Converts a geographic coordinate to a point in the given view’s coordinate system.
+    **/
+
+    getPointInView(
+      coordinate: any /* undefined */[]
+    ): Promise<any /* {"name":"Array"} */>;
+
+    /**
+    Converts a point in the given view’s coordinate system to a geographic coordinate.
+    **/
+
+    getCoordinateFromView(
+      point: any /* undefined */[]
+    ): Promise<any /* {"name":"Array"} */>;
+
+    /**
+    The coordinate bounds(ne, sw) visible in the users’s viewport.
+    **/
+
+    getVisibleBounds(): Promise<any /* {"name":"Array"} */>;
+
+    /**
+    Returns an array of rendered map features that intersect with a given point.
+    **/
+
+    queryRenderedFeaturesAtPoint(
+      coordinate: any /* undefined */[],
+      filter?: Expression,
+      layerIDs?: any /* {"name":"Array"} */
+    ): Promise<any /* {"name":"FeatureCollection"} */>;
+
+    /**
+    Returns an array of rendered map features that intersect with the given rectangle,
+restricted to the given style layers and filtered by the given predicate.
+    **/
+
+    queryRenderedFeaturesInRect(
+      bbox: any /* undefined */[],
+      filter?: Expression,
+      layerIDs?: any /* {"name":"Array"} */
+    ): Promise<any /* {"name":"FeatureCollection"} */>;
+
+    /**
+    Map camera will perform updates based on provided config. Deprecated use Camera#setCamera.
+    **/
+
+    setCamera(config: any /* undefined */): void;
+
+    /**
+    Takes snapshot of map with current tiles and returns a URI to the image
+@param  {Boolean} writeToDisk If true will create a temp file, otherwise it is in base64
+@return {String}
+    **/
+
+    takeSnap(writeToDisk: boolean): Promise<string>;
+
+    /**
+    Returns the current zoom of the map view.
+    **/
+
+    getZoom(): Promise<number>;
+
+    /**
+    Returns the map's geographical centerpoint
+    **/
+
+    getCenter(): Promise<any /* undefined */[]>;
+
+    /**
+    Show the attribution and telemetry action sheet.
+If you implement a custom attribution button, you should add this action to the button.
+    **/
+
+    showAttribution(): void;
+  }
 
   /**
     PointAnnotation represents a one-dimensional shape located at a single geographical coordinate.
@@ -107,7 +225,25 @@ The shape may be a url or a GeoJSON object
     
   **/
 
-  class UserLocation extends Component<UserLocationProps> {}
+  class UserLocation extends Component<UserLocationProps> {
+    /**
+    
+    **/
+
+    setLocationManager(): void;
+
+    /**
+    
+    **/
+
+    needsLocationManagerRunning(): void;
+
+    /**
+    
+    **/
+
+    userIconLayers(): void;
+  }
 
   /**
     VectorSource is a map content source that supplies tiled vector data in Mapbox Vector Tile format to be shown on the map.
@@ -120,7 +256,19 @@ The location of and metadata about the tiles are defined either by an option dic
     
   **/
 
-  class Annotation extends Component<AnnotationProps> {}
+  class Annotation extends Component<AnnotationProps> {
+    /**
+    
+    **/
+
+    onPress(): void;
+
+    /**
+    
+    **/
+
+    symbolStyle(): void;
+  }
 
   /**
     OfflineManager implements a singleton (shared object) that manages offline packs.
@@ -207,7 +355,7 @@ interface BackgroundLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // "union";
+  style?: any /* "union" */;
 }
 
 interface CalloutProps {
@@ -259,7 +407,7 @@ interface CameraProps {
     FIX ME NO DESCRIPTION
   **/
 
-  animationMode?: any; // "enum";
+  animationMode?: any /* "enum" */;
 
   /**
     FIX ME NO DESCRIPTION
@@ -421,7 +569,7 @@ interface CameraProps {
     FIX ME NO DESCRIPTION
   **/
 
-  followUserMode?: any; // "enum";
+  followUserMode?: any /* "enum" */;
 
   /**
     FIX ME NO DESCRIPTION
@@ -457,7 +605,7 @@ interface CameraProps {
     FIX ME NO DESCRIPTION
   **/
 
-  isUserInteraction?: any; // "FIX ME UNKNOWN TYPE";
+  isUserInteraction?: any /* "FIX ME UNKNOWN TYPE" */;
 }
 
 interface CircleLayerProps {
@@ -521,7 +669,7 @@ from which the receiver obtains the data to style.
     Customizable style attributes
   **/
 
-  style?: any; // "union";
+  style?: any /* "union" */;
 }
 
 interface FillExtrusionLayerProps {
@@ -583,7 +731,7 @@ interface FillExtrusionLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // "union";
+  style?: any /* "union" */;
 }
 
 interface FillLayerProps {
@@ -645,7 +793,7 @@ interface FillLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // "union";
+  style?: any /* "union" */;
 }
 
 interface HeatmapLayerProps {
@@ -709,7 +857,7 @@ from which the receiver obtains the data to style.
     Customizable style attributes
   **/
 
-  style?: any; // "union";
+  style?: any /* "union" */;
 }
 
 interface ImageSourceProps {
@@ -724,7 +872,7 @@ interface ImageSourceProps {
 Gifs are currently not supported.
   **/
 
-  url?: any; // "union";
+  url?: any /* "union" */;
 
   /**
     The top left, top right, bottom right, and bottom left coordinates for the image.
@@ -738,7 +886,7 @@ interface LightProps {
     Customizable style attributes
   **/
 
-  style?: any; // "custom";
+  style?: any /* "custom" */;
 }
 
 interface LineLayerProps {
@@ -801,7 +949,7 @@ If the source has not yet been added to the current style, the behavior is undef
     Customizable style attributes
   **/
 
-  style?: any; // "union";
+  style?: any /* "union" */;
 }
 
 interface MapViewProps {
@@ -827,7 +975,7 @@ interface MapViewProps {
     The distance from the edges of the map view’s frame to the edges of the map view’s logical viewport.
   **/
 
-  contentInset?: any; // "union";
+  contentInset?: any /* "union" */;
 
   /**
     Style for wrapping React Native View
@@ -908,91 +1056,91 @@ to your Info.plist
     Map press listener, gets called when a user presses the map
   **/
 
-  onPress?: any; // "func";
+  onPress?: any /* "func" */;
 
   /**
     Map long press listener, gets called when a user long presses the map
   **/
 
-  onLongPress?: any; // "func";
+  onLongPress?: any /* "func" */;
 
   /**
     This event is triggered whenever the currently displayed map region is about to change.
   **/
 
-  onRegionWillChange?: any; // "func";
+  onRegionWillChange?: any /* "func" */;
 
   /**
     This event is triggered whenever the currently displayed map region is changing.
   **/
 
-  onRegionIsChanging?: any; // "func";
+  onRegionIsChanging?: any /* "func" */;
 
   /**
     This event is triggered whenever the currently displayed map region finished changing
   **/
 
-  onRegionDidChange?: any; // "func";
+  onRegionDidChange?: any /* "func" */;
 
   /**
     This event is triggered when the map is about to start loading a new map style.
   **/
 
-  onWillStartLoadingMap?: any; // "func";
+  onWillStartLoadingMap?: any /* "func" */;
 
   /**
     This is triggered when the map has successfully loaded a new map style.
   **/
 
-  onDidFinishLoadingMap?: any; // "func";
+  onDidFinishLoadingMap?: any /* "func" */;
 
   /**
     This event is triggered when the map has failed to load a new map style.
   **/
 
-  onDidFailLoadingMap?: any; // "func";
+  onDidFailLoadingMap?: any /* "func" */;
 
   /**
     This event is triggered when the map will start rendering a frame.
   **/
 
-  onWillStartRenderingFrame?: any; // "func";
+  onWillStartRenderingFrame?: any /* "func" */;
 
   /**
     This event is triggered when the map finished rendering a frame.
   **/
 
-  onDidFinishRenderingFrame?: any; // "func";
+  onDidFinishRenderingFrame?: any /* "func" */;
 
   /**
     This event is triggered when the map fully finished rendering a frame.
   **/
 
-  onDidFinishRenderingFrameFully?: any; // "func";
+  onDidFinishRenderingFrameFully?: any /* "func" */;
 
   /**
     This event is triggered when the map will start rendering the map.
   **/
 
-  onWillStartRenderingMap?: any; // "func";
+  onWillStartRenderingMap?: any /* "func" */;
 
   /**
     This event is triggered when the map finished rendering the map.
   **/
 
-  onDidFinishRenderingMap?: any; // "func";
+  onDidFinishRenderingMap?: any /* "func" */;
 
   /**
     This event is triggered when the map fully finished rendering the map.
   **/
 
-  onDidFinishRenderingMapFully?: any; // "func";
+  onDidFinishRenderingMapFully?: any /* "func" */;
 
   /**
     This event is triggered when a style has finished loading.
   **/
 
-  onDidFinishLoadingStyle?: any; // "func";
+  onDidFinishLoadingStyle?: any /* "func" */;
 
   /**
     The emitted frequency of regionwillchange events
@@ -1065,13 +1213,13 @@ Defaults to the center of the view.
     This callback is fired once this annotation is selected. Returns a Feature as the first param.
   **/
 
-  onSelected?: any; // "func";
+  onSelected?: any /* "func" */;
 
   /**
     This callback is fired once this annotation is deselected.
   **/
 
-  onDeselected?: any; // "func";
+  onDeselected?: any /* "func" */;
 }
 
 interface RasterLayerProps {
@@ -1133,7 +1281,7 @@ interface RasterLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // "union";
+  style?: any /* "union" */;
 }
 
 interface RasterSourceProps {
@@ -1203,7 +1351,7 @@ interface ShapeSourceProps {
     The contents of the source. A shape can represent a GeoJSON geometry, a feature, or a feature colllection.
   **/
 
-  shape?: any; // "object";
+  shape?: any /* "object" */;
 
   /**
     Enables clustering on the source for point shapes.
@@ -1258,14 +1406,14 @@ If you have an asset under Image.xcassets on iOS and the drawables directory on 
 you can specify an array of string names with assets as the key `{ assets: ['pin'] }`.
   **/
 
-  images?: any; // "object";
+  images?: any /* "object" */;
 
   /**
     Source press listener, gets called when a user presses one of the children layers only
 if that layer has a higher z-index than another source layers
   **/
 
-  onPress?: any; // "func";
+  onPress?: any /* "func" */;
 
   /**
     Overrides the default touch hitbox(44x44 pixels) for the source layers
@@ -1345,7 +1493,7 @@ interface SymbolLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // "union";
+  style?: any /* "union" */;
 }
 
 interface UserLocationProps {
@@ -1359,7 +1507,7 @@ interface UserLocationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  renderMode?: any; // "enum";
+  renderMode?: any /* "enum" */;
 
   /**
     FIX ME NO DESCRIPTION
@@ -1371,13 +1519,13 @@ interface UserLocationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  onPress?: any; // "func";
+  onPress?: any /* "func" */;
 
   /**
     FIX ME NO DESCRIPTION
   **/
 
-  onUpdate?: any; // "func";
+  onUpdate?: any /* "func" */;
 
   /**
     FIX ME NO DESCRIPTION
@@ -1404,7 +1552,7 @@ interface VectorSourceProps {
 if that layer has a higher z-index than another source layers
   **/
 
-  onPress?: any; // "func";
+  onPress?: any /* "func" */;
 
   /**
     Overrides the default touch hitbox(44x44 pixels) for the source layers
@@ -1448,7 +1596,7 @@ interface AnnotationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  animationEasingFunction?: any; // "func";
+  animationEasingFunction?: any /* "func" */;
 
   /**
     FIX ME NO DESCRIPTION
@@ -1460,11 +1608,11 @@ interface AnnotationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  onPress?: any; // "func";
+  onPress?: any /* "func" */;
 
   /**
     FIX ME NO DESCRIPTION
   **/
 
-  icon?: any; // "union";
+  icon?: any /* "union" */;
 }
