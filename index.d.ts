@@ -29,8 +29,8 @@ declare namespace MapboxGL {
     **/
 
     fitBounds(
-      northEastCoordinates: any /* undefined */[],
-      southWestCoordinates: any /* undefined */[],
+      northEastCoordinates: number[],
+      southWestCoordinates: number[],
       padding?: number,
       animationDuration?: number
     ): void;
@@ -39,16 +39,13 @@ declare namespace MapboxGL {
     Map camera will fly to new coordinate
     **/
 
-    flyTo(coordinates: any /* undefined */[], animationDuration?: number): void;
+    flyTo(coordinates: [number, number], animationDuration?: number): void;
 
     /**
     Map camera will move to new coordinate at the same zoom level
     **/
 
-    moveTo(
-      coordinates: any /* undefined */[],
-      animationDuration?: number
-    ): void;
+    moveTo(coordinates: [number, number], animationDuration?: number): void;
 
     /**
     Map camera will zoom to specified level
@@ -116,7 +113,7 @@ The georeferenced image scales and rotates as the user zooms and rotates the map
     **/
 
     getPointInView(
-      coordinate: any /* undefined */[]
+      coordinate: [number, number]
     ): Promise<any /* {"name":"Array"} */>;
 
     /**
@@ -124,7 +121,7 @@ The georeferenced image scales and rotates as the user zooms and rotates the map
     **/
 
     getCoordinateFromView(
-      point: any /* undefined */[]
+      point: [number, number]
     ): Promise<any /* {"name":"Array"} */>;
 
     /**
@@ -138,7 +135,7 @@ The georeferenced image scales and rotates as the user zooms and rotates the map
     **/
 
     queryRenderedFeaturesAtPoint(
-      coordinate: any /* undefined */[],
+      coordinate: [number, number],
       filter?: Expression,
       layerIDs?: any /* {"name":"Array"} */
     ): Promise<any /* {"name":"FeatureCollection"} */>;
@@ -149,7 +146,7 @@ restricted to the given style layers and filtered by the given predicate.
     **/
 
     queryRenderedFeaturesInRect(
-      bbox: any /* undefined */[],
+      bbox: number[],
       filter?: Expression,
       layerIDs?: any /* {"name":"Array"} */
     ): Promise<any /* {"name":"FeatureCollection"} */>;
@@ -178,7 +175,7 @@ restricted to the given style layers and filtered by the given predicate.
     Returns the map's geographical centerpoint
     **/
 
-    getCenter(): Promise<any /* undefined */[]>;
+    getCenter(): Promise<number[]>;
 
     /**
     Show the attribution and telemetry action sheet.

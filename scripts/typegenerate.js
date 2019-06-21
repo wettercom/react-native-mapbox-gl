@@ -10,6 +10,7 @@ const coordinatesTypes = [
   'sw',
   'centerCoordinate',
   'coordinates',
+  'point',
   'coordinate',
 ];
 
@@ -104,8 +105,18 @@ function getInterfaceType({name, type}) {
   if (typeof type === 'object' && type.name === 'array') {
     return `${getInterfaceType({name, type: type.value.type})}[]`;
   }
+  if (
+    typeof type === 'object' &&
+    type.name === 'Array' &&
+    coordinatesTypes.includes(name) &&
+    type.elements
+  ) {
+    const subType = getInterfaceType({name, type: type.elements[0]});
+
+    return `[${subType}, ${subType}]`;
+  }
   if (typeof type === 'object' && type.name === 'Array' && type.elements) {
-    return `${getInterfaceType({name, type: type.elements.name})}[]`;
+    return `${getInterfaceType({name, type: type.elements[0]})}[]`;
   }
 
   if (
@@ -126,10 +137,7 @@ function getInterfaceType({name, type}) {
   ) {
     return 'number';
   }
-  if (
-      (typeof type === 'object' && type.name === 'void') ||
-      type === 'void'
-  ) {
+  if ((typeof type === 'object' && type.name === 'void') || type === 'void') {
     return 'void';
   }
 
