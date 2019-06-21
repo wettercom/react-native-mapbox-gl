@@ -126,6 +126,9 @@ function getInterfaceType({name, type}) {
   if (typeof type === 'object' && type.name === 'Array' && type.elements) {
     return `${getInterfaceType({name, type: type.elements[0]})}[]`;
   }
+  if (typeof type === 'object' && type.name === 'Array') {
+    return 'any[] /* FIX ME UNKNOWN ARRAY SUBTYPE */';
+  }
 
   if (
     (typeof type === 'object' && type.name === 'String') ||
@@ -157,6 +160,10 @@ function getInterfaceType({name, type}) {
     return 'any';
   }
 
+  if (type === 'func') {
+    return '(...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */';
+  }
+
   return `any /* ${JSON.stringify(type)} */`;
 }
 
@@ -165,8 +172,6 @@ function getInterfaceType({name, type}) {
  *
  * @param name
  * @param description
- * @param required
- * @param type
  *
  * @returns {string}
  */

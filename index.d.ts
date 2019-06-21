@@ -116,7 +116,7 @@ The georeferenced image scales and rotates as the user zooms and rotates the map
 
     getPointInView(
       coordinate: [number, number]
-    ): Promise<any /* {"name":"Array"} */>;
+    ): Promise<any[] /* FIX ME UNKNOWN ARRAY SUBTYPE */>;
 
     /**
     Converts a point in the given view’s coordinate system to a geographic coordinate.
@@ -124,13 +124,13 @@ The georeferenced image scales and rotates as the user zooms and rotates the map
 
     getCoordinateFromView(
       point: [number, number]
-    ): Promise<any /* {"name":"Array"} */>;
+    ): Promise<any[] /* FIX ME UNKNOWN ARRAY SUBTYPE */>;
 
     /**
     The coordinate bounds(ne, sw) visible in the users’s viewport.
     **/
 
-    getVisibleBounds(): Promise<any /* {"name":"Array"} */>;
+    getVisibleBounds(): Promise<any[] /* FIX ME UNKNOWN ARRAY SUBTYPE */>;
 
     /**
     Returns an array of rendered map features that intersect with a given point.
@@ -138,8 +138,8 @@ The georeferenced image scales and rotates as the user zooms and rotates the map
 
     queryRenderedFeaturesAtPoint(
       coordinate: [number, number],
-      filter?: Expression,
-      layerIDs?: any /* {"name":"Array"} */
+      filter?: any[] /* FIX ME UNKNOWN ARRAY SUBTYPE */,
+      layerIDs?: any[] /* FIX ME UNKNOWN ARRAY SUBTYPE */
     ): Promise<FeatureCollection>;
 
     /**
@@ -149,8 +149,8 @@ restricted to the given style layers and filtered by the given predicate.
 
     queryRenderedFeaturesInRect(
       bbox: number[],
-      filter?: Expression,
-      layerIDs?: any /* {"name":"Array"} */
+      filter?: any[] /* FIX ME UNKNOWN ARRAY SUBTYPE */,
+      layerIDs?: any[] /* FIX ME UNKNOWN ARRAY SUBTYPE */
     ): Promise<FeatureCollection>;
 
     /**
@@ -1055,91 +1055,117 @@ to your Info.plist
     Map press listener, gets called when a user presses the map
   **/
 
-  onPress?: any /* "func" */;
+  onPress?: (...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     Map long press listener, gets called when a user long presses the map
   **/
 
-  onLongPress?: any /* "func" */;
+  onLongPress?: (...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered whenever the currently displayed map region is about to change.
   **/
 
-  onRegionWillChange?: any /* "func" */;
+  onRegionWillChange?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered whenever the currently displayed map region is changing.
   **/
 
-  onRegionIsChanging?: any /* "func" */;
+  onRegionIsChanging?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered whenever the currently displayed map region finished changing
   **/
 
-  onRegionDidChange?: any /* "func" */;
+  onRegionDidChange?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when the map is about to start loading a new map style.
   **/
 
-  onWillStartLoadingMap?: any /* "func" */;
+  onWillStartLoadingMap?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This is triggered when the map has successfully loaded a new map style.
   **/
 
-  onDidFinishLoadingMap?: any /* "func" */;
+  onDidFinishLoadingMap?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when the map has failed to load a new map style.
   **/
 
-  onDidFailLoadingMap?: any /* "func" */;
+  onDidFailLoadingMap?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when the map will start rendering a frame.
   **/
 
-  onWillStartRenderingFrame?: any /* "func" */;
+  onWillStartRenderingFrame?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when the map finished rendering a frame.
   **/
 
-  onDidFinishRenderingFrame?: any /* "func" */;
+  onDidFinishRenderingFrame?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when the map fully finished rendering a frame.
   **/
 
-  onDidFinishRenderingFrameFully?: any /* "func" */;
+  onDidFinishRenderingFrameFully?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when the map will start rendering the map.
   **/
 
-  onWillStartRenderingMap?: any /* "func" */;
+  onWillStartRenderingMap?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when the map finished rendering the map.
   **/
 
-  onDidFinishRenderingMap?: any /* "func" */;
+  onDidFinishRenderingMap?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when the map fully finished rendering the map.
   **/
 
-  onDidFinishRenderingMapFully?: any /* "func" */;
+  onDidFinishRenderingMapFully?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This event is triggered when a style has finished loading.
   **/
 
-  onDidFinishLoadingStyle?: any /* "func" */;
+  onDidFinishLoadingStyle?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     The emitted frequency of regionwillchange events
@@ -1212,13 +1238,15 @@ Defaults to the center of the view.
     This callback is fired once this annotation is selected. Returns a Feature as the first param.
   **/
 
-  onSelected?: any /* "func" */;
+  onSelected?: (...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     This callback is fired once this annotation is deselected.
   **/
 
-  onDeselected?: any /* "func" */;
+  onDeselected?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 }
 
 interface RasterLayerProps {
@@ -1412,7 +1440,7 @@ you can specify an array of string names with assets as the key `{ assets: ['pin
 if that layer has a higher z-index than another source layers
   **/
 
-  onPress?: any /* "func" */;
+  onPress?: (...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     Overrides the default touch hitbox(44x44 pixels) for the source layers
@@ -1518,13 +1546,13 @@ interface UserLocationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  onPress?: any /* "func" */;
+  onPress?: (...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     FIX ME NO DESCRIPTION
   **/
 
-  onUpdate?: any /* "func" */;
+  onUpdate?: (...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     FIX ME NO DESCRIPTION
@@ -1551,7 +1579,7 @@ interface VectorSourceProps {
 if that layer has a higher z-index than another source layers
   **/
 
-  onPress?: any /* "func" */;
+  onPress?: (...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     Overrides the default touch hitbox(44x44 pixels) for the source layers
@@ -1595,7 +1623,9 @@ interface AnnotationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  animationEasingFunction?: any /* "func" */;
+  animationEasingFunction?: (
+    ...args: any[]
+  ) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     FIX ME NO DESCRIPTION
@@ -1607,7 +1637,7 @@ interface AnnotationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  onPress?: any /* "func" */;
+  onPress?: (...args: any[]) => any /* FIX ME UNKNOWN FUNCTION SIGNATURE */;
 
   /**
     FIX ME NO DESCRIPTION
