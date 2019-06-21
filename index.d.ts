@@ -2,6 +2,8 @@ declare module "mapbox__react-native-mapbox-gl";
 
 import { Component } from "react";
 
+import { FeatureCollection } from "@turf/helpers";
+
 declare namespace MapboxGL {
   function setAccessToken(accessToken: string): void;
   function getAccessToken(): Promise<void>;
@@ -138,7 +140,7 @@ The georeferenced image scales and rotates as the user zooms and rotates the map
       coordinate: [number, number],
       filter?: Expression,
       layerIDs?: any /* {"name":"Array"} */
-    ): Promise<any /* {"name":"FeatureCollection"} */>;
+    ): Promise<FeatureCollection>;
 
     /**
     Returns an array of rendered map features that intersect with the given rectangle,
@@ -149,7 +151,7 @@ restricted to the given style layers and filtered by the given predicate.
       bbox: number[],
       filter?: Expression,
       layerIDs?: any /* {"name":"Array"} */
-    ): Promise<any /* {"name":"FeatureCollection"} */>;
+    ): Promise<FeatureCollection>;
 
     /**
     Map camera will perform updates based on provided config. Deprecated use Camera#setCamera.

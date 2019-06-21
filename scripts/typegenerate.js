@@ -33,6 +33,10 @@ function getPrelude() {
     import {
       Component
     } from 'react';
+    
+    import { 
+      FeatureCollection 
+    } from "@turf/helpers";
               
     declare namespace MapboxGL {  
         function setAccessToken(accessToken: string): void;
@@ -91,6 +95,10 @@ function getInterfaceType({name, type}) {
     return `{
     ${type.value.map(prop => getProperty(prop)).join('')}
   }`;
+  }
+
+  if (typeof type === 'object' && type.name === 'FeatureCollection') {
+    return 'FeatureCollection';
   }
 
   if (
