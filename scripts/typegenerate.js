@@ -4,7 +4,17 @@ const prettier = require('prettier');
 
 const config = require('../docs/docs.json');
 
-const coordinatesTypes = ['ne', 'sw', 'centerCoordinate', 'coordinates'];
+// TODO: Provide array length information in docs.json
+const coordinatesTypes = [
+  'ne',
+  'sw',
+  'centerCoordinate',
+  'coordinates',
+  'coordinate',
+];
+
+// TODO: Mark expressions not as any
+const expressionTypes = ['filter'];
 
 /**
  * Print Preude
@@ -72,15 +82,21 @@ function getInterfaceType({name, type}) {
   }`;
   }
 
-  if (name === 'filter') {
-    return 'Expression';
+  if (
+    typeof type === 'object' &&
+    type.name === 'array' &&
+    coordinatesTypes.includes(name)
+  ) {
+    const subType = getInterfaceType({name, type: type.value.type});
+
+    return `[${subType}, ${subType}]`;
+  }
+  if (typeof type === 'object' && type.name === 'array') {
+    return `${getInterfaceType({name, type: type.value.type})}[]`;
   }
 
-  if (type === 'arrayOf' && coordinatesTypes.includes(name)) {
-    return '[number, number]';
-  }
-  if (type === 'arrayOf') {
-    return `any[] // ${type}`;
+  if (expressionTypes.includes(name)) {
+    return 'Expression';
   }
 
   if (type === 'number') {
@@ -96,7 +112,7 @@ function getInterfaceType({name, type}) {
     return 'any';
   }
 
-  return `any; // ${type}`;
+  return `any; // ${JSON.stringify(type)}`;
 }
 
 /**

@@ -207,7 +207,7 @@ interface BackgroundLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // union;
+  style?: any; // "union";
 }
 
 interface CalloutProps {
@@ -259,7 +259,7 @@ interface CameraProps {
     FIX ME NO DESCRIPTION
   **/
 
-  animationMode?: any; // enum;
+  animationMode?: any; // "enum";
 
   /**
     FIX ME NO DESCRIPTION
@@ -421,7 +421,7 @@ interface CameraProps {
     FIX ME NO DESCRIPTION
   **/
 
-  followUserMode?: any; // enum;
+  followUserMode?: any; // "enum";
 
   /**
     FIX ME NO DESCRIPTION
@@ -451,13 +451,13 @@ interface CameraProps {
     FIX ME NO DESCRIPTION
   **/
 
-  alignment?: any[]; // arrayOf;
+  alignment?: number[];
 
   /**
     FIX ME NO DESCRIPTION
   **/
 
-  isUserInteraction?: any; // FIX ME UNKNOWN TYPE;
+  isUserInteraction?: any; // "FIX ME UNKNOWN TYPE";
 }
 
 interface CircleLayerProps {
@@ -521,7 +521,7 @@ from which the receiver obtains the data to style.
     Customizable style attributes
   **/
 
-  style?: any; // union;
+  style?: any; // "union";
 }
 
 interface FillExtrusionLayerProps {
@@ -583,7 +583,7 @@ interface FillExtrusionLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // union;
+  style?: any; // "union";
 }
 
 interface FillLayerProps {
@@ -645,7 +645,7 @@ interface FillLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // union;
+  style?: any; // "union";
 }
 
 interface HeatmapLayerProps {
@@ -709,7 +709,7 @@ from which the receiver obtains the data to style.
     Customizable style attributes
   **/
 
-  style?: any; // union;
+  style?: any; // "union";
 }
 
 interface ImageSourceProps {
@@ -724,13 +724,13 @@ interface ImageSourceProps {
 Gifs are currently not supported.
   **/
 
-  url?: any; // union;
+  url?: any; // "union";
 
   /**
     The top left, top right, bottom right, and bottom left coordinates for the image.
   **/
 
-  coordinates: [number, number];
+  coordinates: [[number, number], [number, number]];
 }
 
 interface LightProps {
@@ -738,7 +738,7 @@ interface LightProps {
     Customizable style attributes
   **/
 
-  style?: any; // custom;
+  style?: any; // "custom";
 }
 
 interface LineLayerProps {
@@ -801,7 +801,7 @@ If the source has not yet been added to the current style, the behavior is undef
     Customizable style attributes
   **/
 
-  style?: any; // union;
+  style?: any; // "union";
 }
 
 interface MapViewProps {
@@ -827,7 +827,7 @@ interface MapViewProps {
     The distance from the edges of the map view’s frame to the edges of the map view’s logical viewport.
   **/
 
-  contentInset?: any; // union;
+  contentInset?: any; // "union";
 
   /**
     Style for wrapping React Native View
@@ -908,91 +908,91 @@ to your Info.plist
     Map press listener, gets called when a user presses the map
   **/
 
-  onPress?: any; // func;
+  onPress?: any; // "func";
 
   /**
     Map long press listener, gets called when a user long presses the map
   **/
 
-  onLongPress?: any; // func;
+  onLongPress?: any; // "func";
 
   /**
     This event is triggered whenever the currently displayed map region is about to change.
   **/
 
-  onRegionWillChange?: any; // func;
+  onRegionWillChange?: any; // "func";
 
   /**
     This event is triggered whenever the currently displayed map region is changing.
   **/
 
-  onRegionIsChanging?: any; // func;
+  onRegionIsChanging?: any; // "func";
 
   /**
     This event is triggered whenever the currently displayed map region finished changing
   **/
 
-  onRegionDidChange?: any; // func;
+  onRegionDidChange?: any; // "func";
 
   /**
     This event is triggered when the map is about to start loading a new map style.
   **/
 
-  onWillStartLoadingMap?: any; // func;
+  onWillStartLoadingMap?: any; // "func";
 
   /**
     This is triggered when the map has successfully loaded a new map style.
   **/
 
-  onDidFinishLoadingMap?: any; // func;
+  onDidFinishLoadingMap?: any; // "func";
 
   /**
     This event is triggered when the map has failed to load a new map style.
   **/
 
-  onDidFailLoadingMap?: any; // func;
+  onDidFailLoadingMap?: any; // "func";
 
   /**
     This event is triggered when the map will start rendering a frame.
   **/
 
-  onWillStartRenderingFrame?: any; // func;
+  onWillStartRenderingFrame?: any; // "func";
 
   /**
     This event is triggered when the map finished rendering a frame.
   **/
 
-  onDidFinishRenderingFrame?: any; // func;
+  onDidFinishRenderingFrame?: any; // "func";
 
   /**
     This event is triggered when the map fully finished rendering a frame.
   **/
 
-  onDidFinishRenderingFrameFully?: any; // func;
+  onDidFinishRenderingFrameFully?: any; // "func";
 
   /**
     This event is triggered when the map will start rendering the map.
   **/
 
-  onWillStartRenderingMap?: any; // func;
+  onWillStartRenderingMap?: any; // "func";
 
   /**
     This event is triggered when the map finished rendering the map.
   **/
 
-  onDidFinishRenderingMap?: any; // func;
+  onDidFinishRenderingMap?: any; // "func";
 
   /**
     This event is triggered when the map fully finished rendering the map.
   **/
 
-  onDidFinishRenderingMapFully?: any; // func;
+  onDidFinishRenderingMapFully?: any; // "func";
 
   /**
     This event is triggered when a style has finished loading.
   **/
 
-  onDidFinishLoadingStyle?: any; // func;
+  onDidFinishLoadingStyle?: any; // "func";
 
   /**
     The emitted frequency of regionwillchange events
@@ -1037,7 +1037,7 @@ interface PointAnnotationProps {
     The center point (specified as a map coordinate) of the annotation.
   **/
 
-  coordinate: any[]; // arrayOf;
+  coordinate: [number, number];
 
   /**
     Specifies the anchor being set on a particular point of the annotation.
@@ -1065,13 +1065,13 @@ Defaults to the center of the view.
     This callback is fired once this annotation is selected. Returns a Feature as the first param.
   **/
 
-  onSelected?: any; // func;
+  onSelected?: any; // "func";
 
   /**
     This callback is fired once this annotation is deselected.
   **/
 
-  onDeselected?: any; // func;
+  onDeselected?: any; // "func";
 }
 
 interface RasterLayerProps {
@@ -1133,7 +1133,7 @@ interface RasterLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // union;
+  style?: any; // "union";
 }
 
 interface RasterSourceProps {
@@ -1203,7 +1203,7 @@ interface ShapeSourceProps {
     The contents of the source. A shape can represent a GeoJSON geometry, a feature, or a feature colllection.
   **/
 
-  shape?: any; // object;
+  shape?: any; // "object";
 
   /**
     Enables clustering on the source for point shapes.
@@ -1258,14 +1258,14 @@ If you have an asset under Image.xcassets on iOS and the drawables directory on 
 you can specify an array of string names with assets as the key `{ assets: ['pin'] }`.
   **/
 
-  images?: any; // object;
+  images?: any; // "object";
 
   /**
     Source press listener, gets called when a user presses one of the children layers only
 if that layer has a higher z-index than another source layers
   **/
 
-  onPress?: any; // func;
+  onPress?: any; // "func";
 
   /**
     Overrides the default touch hitbox(44x44 pixels) for the source layers
@@ -1345,7 +1345,7 @@ interface SymbolLayerProps {
     Customizable style attributes
   **/
 
-  style?: any; // union;
+  style?: any; // "union";
 }
 
 interface UserLocationProps {
@@ -1359,7 +1359,7 @@ interface UserLocationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  renderMode?: any; // enum;
+  renderMode?: any; // "enum";
 
   /**
     FIX ME NO DESCRIPTION
@@ -1371,13 +1371,13 @@ interface UserLocationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  onPress?: any; // func;
+  onPress?: any; // "func";
 
   /**
     FIX ME NO DESCRIPTION
   **/
 
-  onUpdate?: any; // func;
+  onUpdate?: any; // "func";
 
   /**
     FIX ME NO DESCRIPTION
@@ -1404,7 +1404,7 @@ interface VectorSourceProps {
 if that layer has a higher z-index than another source layers
   **/
 
-  onPress?: any; // func;
+  onPress?: any; // "func";
 
   /**
     Overrides the default touch hitbox(44x44 pixels) for the source layers
@@ -1448,7 +1448,7 @@ interface AnnotationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  animationEasingFunction?: any; // func;
+  animationEasingFunction?: any; // "func";
 
   /**
     FIX ME NO DESCRIPTION
@@ -1460,11 +1460,11 @@ interface AnnotationProps {
     FIX ME NO DESCRIPTION
   **/
 
-  onPress?: any; // func;
+  onPress?: any; // "func";
 
   /**
     FIX ME NO DESCRIPTION
   **/
 
-  icon?: any; // union;
+  icon?: any; // "union";
 }
